@@ -19,9 +19,9 @@ function CodigoCaixa()
     $query =   "SELECT * FROM infocaixa";
 
     $resultados = $conexaos->query($query);
-    $lista2 = $resultados->fetchAll();
+    $lista = $resultados->fetchAll();
 
-    return $lista2;
+    return $lista;
 }
 ?>
 
@@ -57,7 +57,24 @@ SomarValores();
 
 function CalcularDesconto()
 {
+    $conexaos = new PDO("mysql:host=localhost;dbname=bd_bembarato", "root", "");
 
+    $query = "SELECT valor FROM tb_produtos";
+    $resultados = $conexaos->query($query);
+
+    $soma = 0;
+
+    if ($resultados->rowCount() > 0) {
+        foreach ($resultados as $row) {
+            $soma += $row['valor'];
+        }
+    }
+
+    $desconto = $soma * 0.02;
+
+    $desconto_formatado = number_format($desconto, 2, ',', '.');
+
+    return $desconto_formatado;
 }
 
 CalcularDesconto();

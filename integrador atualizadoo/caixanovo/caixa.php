@@ -33,6 +33,13 @@ $descontoCompra = CalcularDesconto();
     </tr>
 <?php } ?>
 
+<?php foreach ($codVenda as $linha2) { ?>
+    <tr>
+        <p class="txtinfoscaixa"><?php $linha["id"] ?></p>
+        <?php $ultimoCodVenda = $linha2["codVenda"] ?>
+    </tr>
+<?php } ?>
+
 <body>
     <main class="main">
         <div>
@@ -154,11 +161,7 @@ $descontoCompra = CalcularDesconto();
                         <legend class="legend"><b>Cód. da Venda</b></legend>
                         <div class="centralizarqtdgeral-main">
                             <p class="centralizarqtdgeral">
-                                <?php foreach ($codVenda as $linha2) { ?>
-                                    <tr>
-                                        <p class="centralizarqtdgeral"><?php echo $linha2["codVenda"] ?></p>
-                                    </tr>
-                                <?php } ?>
+                                <?php echo $ultimoCodVenda ?>
                             </p>
                         </div>
                     </fieldset>
