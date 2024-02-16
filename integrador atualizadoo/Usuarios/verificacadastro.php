@@ -10,9 +10,9 @@ $rua = $_POST['rua'];
 $numero = $_POST['numero'];
 $cep = $_POST['cep'];
 
-function validarLogin($nome, $cpf, $email, $nacimento, $telefone, $cidade, $bairro, $rua, $numero, $cep)
+function validarLogin($nome, $cpf, $email, $nascimento, $telefone, $cidade, $bairro, $rua, $numero, $cep)
 {
-    $conexao = new PDO("mysql:host=localhost;dbname=usuarios", "root", "");
+    $conexao = new PDO("mysql:host=localhost;dbname=tb_bembarato", "root", "");
 
     $scriptInserir = "INSERT INTO usuario (nome, cpf, email, nascimento, telefone, cidade, bairro, rua, numero, cep) VALUES (:nome, :cpf, :email, :nascimento, :telefone, :cidade, :bairro, :rua, :numero, :cep)";
     $stmt = $conexao->prepare($scriptInserir);

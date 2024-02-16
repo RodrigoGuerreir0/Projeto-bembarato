@@ -1,5 +1,6 @@
 <?php
-function ValidarCaixa(){
+function ValidarCaixa()
+{
     $conexao = new PDO("mysql:host=localhost;dbname=bd_bembarato", "root", "");
 
     $query =   "SELECT * FROM tb_produtos";
@@ -9,29 +10,41 @@ function ValidarCaixa(){
 
     return $lista;
 }
-?>
 
-<?php
+function ConsultarCaixa()
+{
+    $conexao = new PDO("mysql:host=localhost;dbname=bd_bembarato", "root", "");
+
+    $query =   "SELECT * FROM tb_produtos_venda
+    LEFT JOIN tb_produtos ON tb_produtos_venda.id_produtos=tb_produtos.id
+    WHERE processamento = 0";
+
+    $resultado = $conexao->query($query);
+    $lista = $resultado->fetchAll();
+
+    return $lista;
+}
+
 function CodigoCaixa()
 {
-    $conexaos = new PDO("mysql:host=localhost;dbname=caixa", "root", "");
+    $conexaos = new PDO("mysql:host=localhost;dbname=bd_bembarato", "root", "");
 
-    $query =   "SELECT * FROM infocaixa";
+    $query =   "SELECT * FROM tb_vendas";
 
     $resultados = $conexaos->query($query);
     $lista = $resultados->fetchAll();
 
     return $lista;
 }
-?>
 
-<?php
 function SomarValores()
 {
     try {
         $conexao = new PDO("mysql:host=localhost;dbname=bd_bembarato", "root", "");
 
-        $query =   "SELECT * FROM tb_produtos";
+        $query =   "SELECT * FROM tb_produtos_venda
+        LEFT JOIN tb_produtos ON tb_produtos_venda.id_produtos=tb_produtos.id
+        WHERE processamento = 0 ";
 
         $resultados = $conexao->query($query);
 
@@ -59,7 +72,9 @@ function CalcularDesconto()
 {
     $conexaos = new PDO("mysql:host=localhost;dbname=bd_bembarato", "root", "");
 
-    $query = "SELECT valor FROM tb_produtos";
+    $query = "SELECT * FROM tb_produtos_venda
+    LEFT JOIN tb_produtos ON tb_produtos_venda.id_produtos=tb_produtos.id
+    WHERE processamento = 0 LIMIT 100";
     $resultados = $conexaos->query($query);
 
     $soma = 0;
@@ -110,9 +125,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 } else {
 }
-
-
-
-
-?>
-

@@ -19,24 +19,27 @@ $CodProduto = ValidarCaixa();
 $codigo_barras = ValidarCaixa();
 $somaValores = SomarValores();
 $descontoCompra = CalcularDesconto();
+$dados = ConsultarCaixa();
 ?>
-<?php foreach ($id as $linha) { ?>
+<?php foreach ($dados as $linha) { ?>
     <tr>
-        <p class="txtinfoscaixa"><?php $linha["id"] ?></p>
-        <?php $ultimoID = $linha["id"] ?>
-    </tr>
-<?php } ?>
-<?php foreach ($codigo_barras as $linha) { ?>
-    <tr>
-        <p class="txtinfoscaixa"><?php $linha["id"] ?></p>
-        <?php $ultimoCodBarra = $linha["id"] ?>
+        <p class="txtinfoscaixa"><?php $linha["id_produtos"] ?></p>
+        <?php $ultimoID = $linha["id_produtos"] ?>
     </tr>
 <?php } ?>
 
-<?php foreach ($codVenda as $linha2) { ?>
+
+<?php foreach ($dados as $linha) { ?>
     <tr>
-        <p class="txtinfoscaixa"><?php $linha["id"] ?></p>
-        <?php $ultimoCodVenda = $linha2["codVenda"] ?>
+        <p class="txtinfoscaixa"><?php $linha["codigo_barras"] ?></p>
+        <?php $ultimoCodBarra = $linha["codigo_barras"] ?>
+    </tr>
+<?php } ?>
+
+<?php foreach ($dados as $linha2) { ?>
+    <tr>
+        <p class="txtinfoscaixa"><?php $linha2["id_venda"] ?></p>
+        <?php $ultimoCodVenda = $linha2["id_venda"] ?>
     </tr>
 <?php } ?>
 
@@ -96,10 +99,10 @@ $descontoCompra = CalcularDesconto();
                                     <div class="NumeroDeProdutos-title__main">
                                         <p class="NumeroDeProdutos-title"><b>Nº</b></p>
                                     </div>
-                                    <?php foreach ($id as $linha) { ?>
+                                    <?php foreach ($dados as $linha) { ?>
                                         <tr>
-                                            <p class="txtinfoscaixa"><?php echo $linha["id"] ?></p>
-                                            <?php $ultimoID = $linha["id"] ?>
+                                            <p class="txtinfoscaixa"><?php echo $linha["id_produtos"] ?></p>
+                                            <?php $ultimoID = $linha["id_produtos"] ?>
                                         </tr>
                                     <?php } ?>
                                 </div>
@@ -107,7 +110,7 @@ $descontoCompra = CalcularDesconto();
                                     <div class="NomeDoProduto-title__main">
                                         <p class="NomeDoProduto-title"><b>Nome</b></p>
                                     </div>
-                                    <?php foreach ($nome as $linha) { ?>
+                                    <?php foreach ($dados as $linha) { ?>
                                         <tr>
                                             <p class="txtinfoscaixa"><?php echo $linha["nome"] ?></p>
                                             <?php $ultimoNome = $linha["nome"] ?>
@@ -119,7 +122,7 @@ $descontoCompra = CalcularDesconto();
                                     <div class="DescricaoDoProduto-title__main">
                                         <p class="DescricaoDoProduto-title"><b>Descrição</b></p>
                                     </div>
-                                    <?php foreach ($descricao as $linha) { ?>
+                                    <?php foreach ($dados as $linha) { ?>
                                         <tr>
                                             <p class="txtinfoscaixa"><?php echo $linha["descricao"] ?></p>
 
@@ -131,7 +134,7 @@ $descontoCompra = CalcularDesconto();
                                     <div class="QuantidadeDoProduto-title__main">
                                         <p class="QuantidadeDoProduto-title"><b>Quantidade</b></p>
                                     </div>
-                                    <?php foreach ($estoque as $linha) { ?>
+                                    <?php foreach ($dados as $linha) { ?>
                                         <tr>
                                             <p class="txtinfoscaixa"><?php echo $linha["estoque"] ?></p>
                                             <?php $ultimaQuantidade = $linha["estoque"] ?>
@@ -144,7 +147,7 @@ $descontoCompra = CalcularDesconto();
                                     <div class="ValorDoProduto-title__main">
                                         <p class="ValorDoProduto-title"><b>Valor</b></p>
                                     </div>
-                                    <?php foreach ($valor as $linha) { ?>
+                                    <?php foreach ($dados as $linha) { ?>
                                         <tr>
                                             <p class="txtinfoscaixa"><?php echo "R$ " . $linha["valor"] ?></p>
                                             <?php $ultimoValor = $linha["valor"] ?>
@@ -160,7 +163,7 @@ $descontoCompra = CalcularDesconto();
                     <fieldset class="CodVenda">
                         <legend class="legend"><b>Cód. da Venda</b></legend>
                         <div class="centralizarqtdgeral-main">
-                            <p class="centralizarqtdgeral">
+                            <p class="centralizarqtdgeral" id="ultimoCodVenda">
                                 <?php echo $ultimoCodVenda ?>
                             </p>
                         </div>
@@ -183,6 +186,16 @@ $descontoCompra = CalcularDesconto();
                     </fieldset>
                     <fieldset class="Atalhos">
                         <legend class="legend"><b>Atalhos</b></legend>
+                        <p><b>Quantidade- SHIFT + F2</b></p>
+                        <p><b>Nova Venda- SHIFT + F1</b></p>
+                        <p><b>Inserir Produto- A</b></p>
+                        <p><b>A definir- SHIFT + ?</b></p>
+                        <p><b>A definir- SHIFT + ?</b></p>
+                        <p><b>A definir- SHIFT + ?</b></p>
+                        <p><b>A definir- SHIFT + ?</b></p>
+                        <p><b>A definir- SHIFT + ?</b></p>
+                        <p><b>A definir- SHIFT + ?</b></p>
+                        <p><b>Fechar- ESC/Escape</b></p>
                     </fieldset>
                 </div>
             </div>
